@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğum Günün Kutlu Olsun!</title>
+    <style>
+        :root {
+            --bg-color-1: #1a0305;
+            --bg-color-2: #3d080c;
+            --accent-color: #ffb3ba;
+            --text-color: #fce8e9;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Arka Plana Koyulan Büyütülmüş Pasta Görseli */
+        .background-cake {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 38vw;
+            opacity: 0.18;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 0 40px rgba(255, 179, 186, 0.5));
+            animation: pulseCake 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseCake {
+            0% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.15; }
+            100% { transform: translate(-50%, -50%) scale(1.03); opacity: 0.22; }
+        }
+
+        /* Yumuşak Kızıl Işık Parıltısı */
+        .glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vw;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.22) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Başlık */
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 179, 186, 0.3);
+        }
+
+        /* İnteraktif Butonlar */
+        .action-section {
+            margin-top: 45px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        button {
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            background: var(--accent-color);
+            color: var(--bg-color-1);
+            box-shadow: 0 0 15px rgba(255, 179, 186, 0.4);
+        }
+
+        /* Gizli Mesaj & Hediye Kutusu */
+        .hidden-content {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 179, 186, 0.25);
+            animation: fadeIn 0.5s ease-in-out;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Konfeti Parçacıkları */
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: fall linear forwards;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Arka Plana Koyulan Büyük Pasta -->
+    <div class="background-cake">🎂</div>
+    <div class="glow"></div>
+
+    <div class="container">
+        <h1>İyi ki Doğdun Cnm ❤️</h1>
+
+        <div class="action-section">
+            <button onclick="showMessage()">Mesajı Oku</button>
+            <button onclick="showGift()">Hediyeni Gör 🎁</button>
+        </div>
+
+        <div id="messageBox" class="hidden-content">
+            <p style="line-height: 1.6; color: #fce8e9; margin: 0; font-size: 1.1rem;">
+                Bebelak, doğum günün kutlu olsun. 🎂 Nice mutlu, güzel yıllara. İyi ki varsın. ❤️
+            </p>
+        </div>
+
+        <div id="giftBox" class="hidden-content">
+            <h3 style="font-weight: 300; margin-top: 0;">Sürpriz Hediye!</h3>
+            <p style="color: var(--accent-color); font-size: 1.2rem; margin-bottom: 0;">
+                <strong>MLBB'ye gir ve hediyeni gör</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById('messageBox').style.display = 'block';
+            document.getElementById('giftBox').style.display = 'none';
+        }
+
+        function showGift() {
+            document.getElementById('giftBox').style.display = 'block';
+            document.getElementById('messageBox').style.display = 'none';
+            createConfetti();
+        }
+
+        function createConfetti() {
+            for(let i=0; i<35; i++) {
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.opacity = Math.random();
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                
+                let colors = ['#ffb3ba', '#ffffff', '#ff4d6d', '#ff758f'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+    </script>
+</body>
+</html>
